@@ -4,7 +4,11 @@
     <AzureFunctionsVersion>v2</AzureFunctionsVersion>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.Azure.NotificationHubs" Version="1.0.9" />
+    <PackageReference Include="Microsoft.Azure.WebJobs.Extensions.NotificationHubs" Version="1.0.0" />
     <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="1.0.6" />
+    <PackageReference Include="Microsoft.Toolkit.Uwp.Notifications" Version="2.1.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
   </ItemGroup>
   <ItemGroup>
     <None Update="host.json">
