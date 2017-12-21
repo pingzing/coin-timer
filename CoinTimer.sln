@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.0
+VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoinTimer", "CoinTimer\CoinTimer.csproj", "{4296C610-BB93-45E4-9422-8F777208CECF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoinTimer", "CoinTimer\CoinTimer.csproj", "{4296C610-BB93-45E4-9422-8F777208CECF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
