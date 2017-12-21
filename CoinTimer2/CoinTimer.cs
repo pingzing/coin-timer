@@ -1,26 +1,26 @@
-using Microsoft.Azure.NotificationHubs;
-using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Host;
-using Microsoft.Toolkit.Uwp.Notifications;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Azure.NotificationHubs;
+using Microsoft.Azure.WebJobs;
+using Microsoft.Azure.WebJobs.Host;
+using Microsoft.Toolkit.Uwp.Notifications;
+using Newtonsoft.Json;
 
 namespace CoinTimer
 {
-    public static class GetPricesFromCoinbase
+    public static class CoinTimer
     {
-        [FunctionName("GetPricesFromCoinbase")]
+        [FunctionName("CoinTimer")]
         public static async Task Run([TimerTrigger("0 */5 * * * *", RunOnStartup = true)]TimerInfo myTimer,
             [NotificationHub(ConnectionStringSetting = "AzureWebJobsNotificationHubsConnectionString",
                 HubName = "cointesthub",
                 Platform = NotificationPlatform.Wns)] IAsyncCollector<Notification> notification,
             TraceWriter log)
-        {
+        {            
             log.Info("Running!");
             CancellationTokenSource cts = new CancellationTokenSource(10_000);
 
@@ -132,6 +132,5 @@ namespace CoinTimer
                 return null;
             }
         }
-
     }
 }
