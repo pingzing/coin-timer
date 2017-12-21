@@ -15,7 +15,7 @@ namespace CoinTimer
     public static class GetPricesFromCoinbase
     {
         [FunctionName("GetPricesFromCoinbase")]
-        public static async Task Run([TimerTrigger("0 */5 * * * *")]TimerInfo myTimer,
+        public static async Task Run([TimerTrigger("0 */5 * * * *", RunOnStartup = true)]TimerInfo myTimer,
             [NotificationHub(ConnectionStringSetting = "AzureWebJobsNotificationHubsConnectionString",
                 HubName = "cointesthub",
                 Platform = NotificationPlatform.Wns)] IAsyncCollector<Notification> notification,
@@ -39,7 +39,8 @@ namespace CoinTimer
 
                     foreach (var successfulTile in tiles.Where(x => x != null))
                     {
-                        await notification.AddAsync(new WindowsNotification(successfulTile.GetContent()));
+                        Dictionary<string, string> tagHeader = new Dictionary<string, string> { { "X-WNS-Tag", successfulTile.Visual.Arguments } };
+                        await notification.AddAsync(new WindowsNotification(successfulTile.GetContent(), tagHeader));
                     }
                 }
                 catch (Exception ex) when (ex is OperationCanceledException || ex is HttpRequestException)
@@ -64,6 +65,7 @@ namespace CoinTimer
 
                 TileVisual tileVisual = new TileVisual()
                 {
+                    Arguments = coinType,
                     TileSmall = new TileBinding
                     {
                         Content = new TileBindingContentAdaptive
@@ -120,7 +122,7 @@ namespace CoinTimer
                 TileContent tileContent = new TileContent
                 {
                     Visual = tileVisual
-                };                
+                };
 
                 return tileContent;
             }
